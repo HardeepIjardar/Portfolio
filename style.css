@@ -210,11 +210,18 @@ nav ul li a:hover::after{
 }
 .blog-list{
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(250px, 1fr));
+    grid-template-columns: repeat(2 ,minmax(250px, 1fr));
     grid-gap: 40px;
     margin-top: 50px;
+    scrollbar-width: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+}
+.blog-list::-webkit-scrollbar{
+    display: none;
 }
 .blog{
+    scroll-snap-align: start;
     border-radius: 10px;
     position: relative;
     overflow: hidden;
