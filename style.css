@@ -19,16 +19,37 @@ body{
     background-image: url('./media/background.png');
     background-size: cover;
     background-position: center;
+    /* Add padding-top to account for fixed navigation */
+    padding-top: 60px;
 }
 .container{
     padding: 10px 10%;
 }
+
+/* Fixed Navigation Styles */
 nav{
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
+    /* Added fixed positioning properties */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 10%;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.85); /* Semi-transparent background */
+    transition: all 0.3s ease;
 }
+
+/* Style for scrolled state */
+nav.scrolled {
+    padding: 5px 10%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.95);
+}
+
 .logo{
     width: 250px;
     margin-top: 8px;
@@ -70,7 +91,6 @@ nav ul li a:hover::after{
     color: #ff004f;
 }
 .button a{
-
     display: block;
     width: fit-content;
     border: 1px solid #ff004f;
@@ -409,4 +429,4 @@ nav .fa-solid{
     .contact-left, .contact-right{
         flex-basis: 100%;
     }
-}  
+}
