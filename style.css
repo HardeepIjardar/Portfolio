@@ -227,32 +227,42 @@ nav ul li a:hover::after{
 
 #blogs{
     padding: 50px 0;
+    overflow: hidden;
+    position: relative;
 }
+
 .blog-list{
-    display: grid;
-    grid-template-columns: repeat(2 ,minmax(250px, 1fr));
-    grid-gap: 40px;
+    display: flex;
+    gap: 40px;
     margin-top: 50px;
-    scrollbar-width: none;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    animation: scroll 180s linear infinite;
+    width: max-content;
 }
-.blog-list::-webkit-scrollbar{
-    display: none;
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-100% - 40px));
+    }
 }
+
 .blog{
-    scroll-snap-align: start;
+    flex: 0 0 auto;
+    width: 400px;
     border-radius: 10px;
     position: relative;
     overflow: hidden;
 }
+
 .blog img{
     width: 100%;
     border-radius: 10px;
     display: block;
-    height: 350px;
     transition: transform 0.5s;
 }
+
 .layer{
     width: 100%;
     height: 0%;
@@ -311,10 +321,17 @@ nav ul li a:hover::after{
     border: 2px solid #ff004f;
 }
 
+/* Add hover pause to animation */
+.blog-list:hover {
+    animation-play-state: paused;
+}
 
-
-
-
+/* Ensure smooth scrolling */
+.blog-list {
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
 
 .contact-left{
     flex-basis: 35%;
