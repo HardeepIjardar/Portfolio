@@ -242,10 +242,10 @@ nav ul li a:hover::after{
 @keyframes scroll {
     0% {
         transform: translateX(0);
-    }
+}
     100% {
         transform: translateX(calc(-100% - 40px));
-    }
+}
 }
 
 .blog{
