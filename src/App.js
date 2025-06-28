@@ -10,6 +10,7 @@ import Contact from './components/Contact';
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [loadingText, setLoadingText] = useState('');
+  const [loadingDots, setLoadingDots] = useState('');
   const [showHeaderName, setShowHeaderName] = useState(false);
   const [showContent, setShowContent] = useState(false);
   const [phase, setPhase] = useState('morph'); // morph, fill, move, fade, done
@@ -115,6 +116,22 @@ function App() {
     return () => clearTimeout(fadeTimeout);
   }, [phase]);
 
+  // Animate loading dots
+  useEffect(() => {
+    if (phase === 'move' || phase === 'fade' || phase === 'done') return;
+    
+    const dotsInterval = setInterval(() => {
+      setLoadingDots(prev => {
+        if (prev === '') return '.';
+        if (prev === '.') return '..';
+        if (prev === '..') return '...';
+        return '';
+      });
+    }, 500);
+
+    return () => clearInterval(dotsInterval);
+  }, [phase]);
+
   // Determine animation for morph text
   const morphAnimate = (() => {
     if (phase === 'move') {
@@ -184,6 +201,27 @@ function App() {
             >
               {loadingText}
             </motion.h2>
+            <motion.p
+              className="loading-subtitle"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ 
+                opacity: phase === 'move' || phase === 'fade' || phase === 'done' ? 0 : 1, 
+                y: 0 
+              }}
+              transition={{ 
+                duration: phase === 'move' ? 0.3 : 0.5, 
+                delay: phase === 'move' ? 0 : 0.3 
+              }}
+              style={{
+                color: '#ababab',
+                fontSize: '1.2rem',
+                fontWeight: '300',
+                marginTop: '20px',
+                textAlign: 'center',
+              }}
+            >
+              Loading Portfolio{loadingDots}
+            </motion.p>
           </motion.div>
         )}
       </AnimatePresence>
