@@ -59,8 +59,8 @@ function App() {
   // Step 2: Color fill (pink)
   useEffect(() => {
     if (phase !== 'fill') return;
-    // Animate color fill for 0.7s, then move
-    const fillTimeout = setTimeout(() => setPhase('move'), 700);
+    // Animate color fill for 0.9s, then move
+    const fillTimeout = setTimeout(() => setPhase('move'), 50);
     return () => clearTimeout(fillTimeout);
   }, [phase]);
 
@@ -85,11 +85,11 @@ function App() {
         setMorphAnim(anim);
         setFinalMorphAnim(anim); // store final position
         // Start fade-in at 90% of the move (1.8s)
-        fadeTimeout = setTimeout(() => setShowContent(true), 1800);
+        fadeTimeout = setTimeout(() => setShowContent(true), 100);
         setTimeout(() => {
           setShowHeaderName(true);
           setPhase('fade');
-        }, 2000); // 2s for move
+        }, 1000); // 2s for move
       } else if (pollCount < maxPolls) {
         pollCount++;
         pollTimer = setTimeout(tryAnimate, pollInterval);
@@ -127,7 +127,7 @@ function App() {
         if (prev === '..') return '...';
         return '';
       });
-    }, 500);
+    }, 400);
 
     return () => clearInterval(dotsInterval);
   }, [phase]);
